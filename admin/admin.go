@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"strconv"
 
-	duoapi "github.com/duosecurity/duo_api_golang"
+	duoapi "github.com/chanzuckerberg/duo_api_golang"
 	"github.com/google/go-querystring/query"
 )
 
