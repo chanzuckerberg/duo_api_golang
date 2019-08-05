@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"net/url"
 	"strconv"
+
+	duoapi "github.com/chanzuckerberg/duo_api_golang"
 )
 
 type AuthApi struct {
