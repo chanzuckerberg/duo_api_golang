@@ -1,4 +1,2 @@
-github.com/chanzuckerberg/duo_api_golang v0.0.0-20190823230259-456c7c7e5138 h1:+P63i0WxKl/mon0Qkzl4HAxzF6lGN+3HZuyHDvBgsWw=
-github.com/chanzuckerberg/duo_api_golang v0.0.0-20190823230259-456c7c7e5138/go.mod h1:XG3issWMmhAILqTqVWzgwwS21qnHAOLFVIGm5bIwn5I=
 github.com/google/go-querystring v1.0.0 h1:Xkwi/a1rcvNg1PPYe5vI8GbeBY/jrVuDX5ASuANWTrk=
 github.com/google/go-querystring v1.0.0/go.mod h1:odCYkC5MyYFN7vkCjXpyrEuKhc/BUO6wN/zVPAxq5ck=
