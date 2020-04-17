@@ -1462,6 +1462,167 @@ func TestGetGroup(t *testing.T) {
 	}
 }
 
+func TestGetGroupMembers(t *testing.T) {
+	var last_request *http.Request
+	ts := httptest.NewTLSServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintln(w, getGroupMembersResponse)
+			last_request = r
+		}),
+	)
+	defer ts.Close()
+
+	duo := buildAdminClient(ts.URL, nil)
+
+	result, err := duo.GetGroupMembers("1")
+	if err != nil {
+		t.Errorf("Unexpected error from GetGroupMembers call %v", err.Error())
+	}
+	if result.Stat != "OK" {
+		t.Errorf("Expected OK, but got %s", result.Stat)
+	}
+	if len(result.Response) != 3 {
+		t.Errorf("Expected 3 users, but got %d", len(result.Response))
+	}
+	if result.Response[0].Username != "user1" {
+		t.Errorf("Expected username user1, but got %s", result.Response[0].Username)
+	}
+
+	request_query := last_request.URL.Query()
+	if request_query["limit"][0] != "100" {
+		t.Errorf("Expected to see a limit of 100 in request, bug got %s", request_query["limit"])
+	}
+	if request_query["offset"][0] != "0" {
+		t.Errorf("Expected to see an offset of 0 in request, bug got %s", request_query["offset"])
+	}
+}
+
+func TestGetGroupMembersMultiple(t *testing.T) {
+	requests := []*http.Request{}
+	ts := httptest.NewTLSServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			if len(requests) == 0 {
+				fmt.Fprintln(w, getGroupMembersPage1Response)
+			} else {
+				fmt.Fprintln(w, getGroupMembersPage2Response)
+			}
+			requests = append(requests, r)
+		}),
+	)
+	defer ts.Close()
+
+	duo := buildAdminClient(ts.URL, nil)
+
+	result, err := duo.GetGroupMembers("1")
+
+	if len(requests) != 2 {
+		t.Errorf("Expected two requets, found %d", len(requests))
+	}
+
+	if len(result.Response) != 4 {
+		t.Errorf("Expected four users in the response, found %d", len(result.Response))
+	}
+
+	if err != nil {
+		t.Errorf("Expected err to be nil, found %s", err)
+	}
+}
+
+func TestGetGroupMembersPageArgs(t *testing.T) {
+	requests := []*http.Request{}
+	ts := httptest.NewTLSServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintln(w, getEmptyPageArgsResponse)
+			requests = append(requests, r)
+		}),
+	)
+
+	defer ts.Close()
+
+	duo := buildAdminClient(ts.URL, nil)
+
+	_, err := duo.GetGroupMembers("1", func(values *url.Values) {
+		values.Set("limit", "200")
+		values.Set("offset", "1")
+		return
+	})
+
+	if err != nil {
+		t.Errorf("Encountered unexpected error: %s", err)
+	}
+
+	if len(requests) != 1 {
+		t.Errorf("Expected there to be one request, found %d", len(requests))
+	}
+	request := requests[0]
+	request_query := request.URL.Query()
+	if request_query["limit"][0] != "200" {
+		t.Errorf("Expected to see a limit of 100 in request, bug got %s", request_query["limit"])
+	}
+	if request_query["offset"][0] != "1" {
+		t.Errorf("Expected to see an offset of 0 in request, bug got %s", request_query["offset"])
+	}
+}
+
+const getGroupMembersResponse = `{
+	"metadata": {
+		"total_objects": 3
+	},
+	"response": [
+		{
+			"user_id": "DUXXXXXXXXXXXXXXXXXX",
+			"username": "user1"
+		},
+		{
+			"user_id": "DUXXXXXXXXXXXXXXXXXX",
+			"username": "user2"
+		},
+		{
+			"user_id": "DUXXXXXXXXXXXXXXXXXX",
+			"username": "user3"
+		}
+	],
+	"stat": "OK"
+}`
+
+const getGroupMembersPage1Response = `{
+	"response": [
+		{
+			"user_id": "DUXXXXXXXXXXXXXXXXXX",
+			"username": "user1"
+		},
+		{
+			"user_id": "DUXXXXXXXXXXXXXXXXXX",
+			"username": "user2"
+		}
+	],
+	"stat": "OK",
+	"metadata": {
+		"prev_offset": null,
+		"next_offset": 2,
+		"total_objects": 4
+	}
+}`
+
+const getGroupMembersPage2Response = `{
+	"response": [
+		{
+			"user_id": "DUXXXXXXXXXXXXXXXXXX",
+			"username": "user3"
+		},
+		{
+			"user_id": "DUXXXXXXXXXXXXXXXXXX",
+			"username": "user4"
+		}
+	],
+	"stat": "OK",
+	"metadata": {
+		"prev_offset": 0,
+		"next_offset": null,
+		"total_objects": 4
+	}
+}`
+
 const getPhonesResponse = `{
 	"stat": "OK",
 	"response": [{

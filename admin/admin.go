@@ -69,6 +69,12 @@ type Group struct {
 	VoiceEnabled     bool `json:"voice_enabled"`
 }
 
+// GroupMember is a stub version of User used when working with groups
+type GroupMember struct {
+	UserID   string `json:"user_id"`
+	Username string
+}
+
 // Phone models a user's phone.
 type Phone struct {
 	Activated        bool
@@ -584,6 +590,62 @@ func (c *Client) GetGroup(groupID string) (*GetGroupResult, error) {
 	if err != nil {
 		return nil, err
 	}
+	return result, nil
+}
+
+// GetGroupMembersResult models responses containing a list of group members.
+type GetGroupMembersResult struct {
+	duoapi.StatResult
+	ListResult
+	Response []GroupMember
+}
+
+func (result *GetGroupMembersResult) getResponse() interface{} {
+	return result.Response
+}
+
+func (result *GetGroupMembersResult) appendResponse(members interface{}) {
+	asserted_members := members.([]GroupMember)
+	result.Response = append(result.Response, asserted_members...)
+}
+
+// GetGroupMembers calls GET /admin/v2/group/:group_id/users
+// See https://duo.com/docs/adminapi#v2-groups-get-users
+func (c *Client) GetGroupMembers(groupID string, options ...func(*url.Values)) (*GetGroupMembersResult, error) {
+	params := url.Values{}
+	for _, o := range options {
+		o(&params)
+	}
+
+	params.Set("group_id", groupID)
+	cb := func(params url.Values) (responsePage, error) {
+		return c.retrieveGroupMembers(params)
+	}
+	response, err := c.retrieveItems(params, cb)
+	if err != nil {
+		return nil, err
+	}
+
+	return response.(*GetGroupMembersResult), nil
+}
+
+func (c *Client) retrieveGroupMembers(params url.Values) (*GetGroupMembersResult, error) {
+	// Get the group_id from params and then remove it since we'll pass it in the URL itself not as a paramater.
+	groupID := params.Get("group_id")
+	params.Del("group_id")
+
+	url := fmt.Sprintf("/admin/v1/groups/%s/users", groupID)
+	_, body, err := c.SignedCall(http.MethodGet, url, params, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+
+	result := &GetGroupMembersResult{}
+	err = json.Unmarshal(body, result)
+	if err != nil {
+		return nil, err
+	}
+
 	return result, nil
 }
 
