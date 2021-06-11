@@ -69,7 +69,9 @@ const getUsersResponse = `{
 				"push"
 			],
 			"platform": "Apple iOS",
+			"model": "Apple iPhone",
 			"activated": false,
+			"last_seen": "2019-03-04T15:04:04",
 			"sms_passcodes_sent": false
 		}],
 		"realname": "Joe Smith",
@@ -116,7 +118,9 @@ const getUserResponse = `{
 				"push"
 			],
 			"platform": "Apple iOS",
+			"model": "Apple iPhone",
 			"activated": false,
+			"last_seen": "2019-03-04T15:04:04",
 			"sms_passcodes_sent": false
 		}],
 		"realname": "Joe Smith",
@@ -359,7 +363,9 @@ const getUsersPage1Response = `{
 				"push"
 			],
 			"platform": "Apple iOS",
+			"model": "Apple iPhone",
 			"activated": false,
+			"last_seen": "2019-03-04T15:04:04",
 			"sms_passcodes_sent": false
 		}],
 		"realname": "Joe Smith",
@@ -411,7 +417,9 @@ const getUsersPage2Response = `{
 				"push"
 			],
 			"platform": "Apple iOS",
+			"model": "Apple iPhone",
 			"activated": false,
+			"last_seen": "2019-03-04T15:04:04",
 			"sms_passcodes_sent": false
 		}],
 		"realname": "Joe Smith",
@@ -770,6 +778,7 @@ const getUserPhonesResponse = `{
 	"stat": "OK",
 	"response": [{
 		"activated": false,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"sms",
 			"phone",
@@ -780,6 +789,7 @@ const getUserPhonesResponse = `{
 		"number": "+15035550102",
 		"phone_id": "DPFZRS9FB0D46QFTM890",
 		"platform": "Apple iOS",
+		"model": "Apple iPhone",
 		"postdelay": null,
 		"predelay": null,
 		"sms_passcodes_sent": false,
@@ -787,6 +797,7 @@ const getUserPhonesResponse = `{
 	},
 	{
 		"activated": false,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"phone"
 		],
@@ -795,6 +806,7 @@ const getUserPhonesResponse = `{
 		"number": "+15035550103",
 		"phone_id": "DPFZRS9FB0D46QFTM891",
 		"platform": "Unknown",
+		"model": "Unknown",
 		"postdelay": null,
 		"predelay": null,
 		"sms_passcodes_sent": false,
@@ -846,6 +858,7 @@ const getUserPhonesPage1Response = `{
 	"stat": "OK",
 	"response": [{
 		"activated": false,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"sms",
 			"phone",
@@ -856,6 +869,7 @@ const getUserPhonesPage1Response = `{
 		"number": "+15035550102",
 		"phone_id": "DPFZRS9FB0D46QFTM890",
 		"platform": "Apple iOS",
+		"model": "Apple iPhone",
 		"postdelay": null,
 		"predelay": null,
 		"sms_passcodes_sent": false,
@@ -863,6 +877,7 @@ const getUserPhonesPage1Response = `{
 	},
 	{
 		"activated": false,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"phone"
 		],
@@ -871,6 +886,7 @@ const getUserPhonesPage1Response = `{
 		"number": "+15035550103",
 		"phone_id": "DPFZRS9FB0D46QFTM891",
 		"platform": "Unknown",
+		"model": "Unknown",
 		"postdelay": null,
 		"predelay": null,
 		"sms_passcodes_sent": false,
@@ -887,6 +903,7 @@ const getUserPhonesPage2Response = `{
 	"stat": "OK",
 	"response": [{
 		"activated": false,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"sms",
 			"phone",
@@ -897,6 +914,7 @@ const getUserPhonesPage2Response = `{
 		"number": "+15035550102",
 		"phone_id": "DPFZRS9FB0D46QFTM890",
 		"platform": "Apple iOS",
+		"model": "Apple iPhone",
 		"postdelay": null,
 		"predelay": null,
 		"sms_passcodes_sent": false,
@@ -904,6 +922,7 @@ const getUserPhonesPage2Response = `{
 	},
 	{
 		"activated": false,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"phone"
 		],
@@ -912,6 +931,7 @@ const getUserPhonesPage2Response = `{
 		"number": "+15035550103",
 		"phone_id": "DPFZRS9FB0D46QFTM891",
 		"platform": "Unknown",
+		"model": "Unknown",
 		"postdelay": null,
 		"predelay": null,
 		"sms_passcodes_sent": false,
@@ -1627,6 +1647,7 @@ const getPhonesResponse = `{
 	"stat": "OK",
 	"response": [{
 		"activated": true,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"push",
 			"sms",
@@ -1640,6 +1661,7 @@ const getPhonesResponse = `{
 		"number": "+15555550100",
 		"phone_id": "DPFZRS9FB0D46QFTM899",
 		"platform": "Google Android",
+		"model": "Google Pixel",
 		"postdelay": "",
 		"predelay": "",
 		"screenlock": "Locked",
@@ -1708,6 +1730,7 @@ const getPhonesPage1Response = `{
 	"stat": "OK",
 	"response": [{
 		"activated": true,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"push",
 			"sms",
@@ -1721,6 +1744,7 @@ const getPhonesPage1Response = `{
 		"number": "+15555550100",
 		"phone_id": "DPFZRS9FB0D46QFTM899",
 		"platform": "Google Android",
+		"model": "Google Pixel",
 		"postdelay": "",
 		"predelay": "",
 		"screenlock": "Locked",
@@ -1754,6 +1778,7 @@ const getPhonesPage2Response = `{
 	"stat": "OK",
 	"response": [{
 		"activated": true,
+		"last_seen": "2019-03-04T15:04:04",
 		"capabilities": [
 			"push",
 			"sms",
@@ -1767,6 +1792,7 @@ const getPhonesPage2Response = `{
 		"number": "+15555550100",
 		"phone_id": "DPFZRS9FB0D46QFTM899",
 		"platform": "Google Android",
+		"model": "Google Pixel",
 		"postdelay": "",
 		"predelay": "",
 		"screenlock": "Locked",
@@ -1879,7 +1905,9 @@ const getPhoneResponse = `{
 			"push"
 		],
 		"platform": "Apple iOS",
+		"model": "Apple iPhone",
 		"activated": false,
+		"last_seen": "2019-03-04T15:04:04",
 		"sms_passcodes_sent": false,
 		"users": [{
 			"user_id": "DUJZ2U4L80HT45MQ4EOQ",
@@ -1914,6 +1942,30 @@ func TestGetPhone(t *testing.T) {
 	}
 	if result.Response.PhoneID != "DPFZRS9FB0D46QFTM899" {
 		t.Errorf("Expected phone ID DPFZRS9FB0D46QFTM899, but got %s", result.Response.PhoneID)
+	}
+}
+
+const deletePhoneResponse = `{
+	"stat": "OK",
+	"response": ""
+}`
+
+func TestDeletePhone(t *testing.T) {
+	ts := httptest.NewTLSServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintln(w, deletePhoneResponse)
+		}),
+	)
+	defer ts.Close()
+
+	duo := buildAdminClient(ts.URL, nil)
+
+	result, err := duo.DeletePhone("DPFZRS9FB0D46QFTM899")
+	if err != nil {
+		t.Errorf("Unexpected error from DeletePhone call %v", err.Error())
+	}
+	if result.Stat != "OK" {
+		t.Errorf("Expected OK, but got %s", result.Stat)
 	}
 }
 
@@ -2354,5 +2406,44 @@ func TestGetU2FToken(t *testing.T) {
 	}
 	if result.Response[0].RegistrationID != "D21RU6X1B1DF5P54B6PV" {
 		t.Errorf("Expected registration ID D21RU6X1B1DF5P54B6PV, but got %s", result.Response[0].RegistrationID)
+	}
+}
+
+const getBypassCodesResponse = `{
+	"stat": "OK",
+	"response": [
+		"407176182",
+		"016931781",
+		"338390347",
+		"537828175",
+		"006165274",
+		"438680449",
+		"877647224",
+		"196167433",
+		"719424708",
+		"727559878"
+	]
+}`
+
+func TestGetBypassCodes(t *testing.T) {
+	ts := httptest.NewTLSServer(
+		http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			fmt.Fprintln(w, getBypassCodesResponse)
+		}),
+	)
+	defer ts.Close()
+
+	duo := buildAdminClient(ts.URL, nil)
+
+	result, err := duo.GetUserBypassCodes("D21RU6X1B1DF5P54B6PV")
+
+	if err != nil {
+		t.Errorf("Unexpected error from GetUserBypassCodes call %v", err.Error())
+	}
+	if result.Stat != "OK" {
+		t.Errorf("Expected OK, but got %s", result.Stat)
+	}
+	if len(result.Response) != 10 {
+		t.Errorf("Expected 10 codes, but got %d", len(result.Response))
 	}
 }

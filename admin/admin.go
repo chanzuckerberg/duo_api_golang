@@ -82,6 +82,8 @@ type Phone struct {
 	Encrypted        string
 	Extension        string
 	Fingerprint      string
+	LastSeen         string `json:"last_seen"`
+	Model            string
 	Name             string
 	Number           string
 	PhoneID          string `json:"phone_id"`
@@ -518,6 +520,36 @@ func (c *Client) retrieveUserU2FTokens(userID string, params url.Values) (*GetU2
 	return result, nil
 }
 
+// StringArrayResult models response containing an array of strings.
+type StringArrayResult struct {
+	duoapi.StatResult
+	Response []string
+}
+
+// GetUserBypassCodes calls POST /admin/v1/users/:user_id/bypass_codes
+// see https://duo.com/docs/adminapi#create-bypass-codes-for-user
+func (c *Client) GetUserBypassCodes(userID string, options ...func(*url.Values)) (*StringArrayResult, error) {
+	path := fmt.Sprintf("/admin/v1/users/%s/bypass_codes", userID)
+
+	params := url.Values{}
+	for _, o := range options {
+		o(&params)
+	}
+
+	_, body, err := c.SignedCall(http.MethodPost, path, params, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+
+	result := &StringArrayResult{}
+	err = json.Unmarshal(body, result)
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
 // Group methods
 
 // GetGroupsResult models responses containing a list of groups.
@@ -731,6 +763,24 @@ func (c *Client) GetPhone(phoneID string) (*GetPhoneResult, error) {
 	}
 
 	result := &GetPhoneResult{}
+	err = json.Unmarshal(body, result)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// DeletePhone calls DELETE /admin/v1/phones/:phone_id
+// See https://duo.com/docs/adminapi#delete-phone
+func (c *Client) DeletePhone(phoneID string) (*duoapi.StatResult, error) {
+	path := fmt.Sprintf("/admin/v1/phones/%s", phoneID)
+
+	_, body, err := c.SignedCall(http.MethodDelete, path, nil, duoapi.UseTimeout)
+	if err != nil {
+		return nil, err
+	}
+
+	result := &duoapi.StatResult{}
 	err = json.Unmarshal(body, result)
 	if err != nil {
 		return nil, err
